@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Генератор изображений</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        form { margin-bottom: 2em; }
+        textarea { width: 100%; max-width: 600px; height: 100px; }
+        img { max-width: 600px; display: block; margin-top: 1em; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Генерация изображения по описанию</h1>
+    <form method="POST">
+        <label for="prompt_text"><strong>Описание изображения:</strong></label><br>
+        <textarea id="prompt_text" name="prompt_text" placeholder="Опишите, что вы хотите нарисовать...">{{ prompt_text }}</textarea><br>
+        <button type="submit">Сгенерировать</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if image_url %}
+      <h2>Результат</h2>
+      <p><strong>Ссылка на изображение:</strong> <a href="{{ image_url }}" target="_blank">{{ image_url }}</a></p>
+      <p><strong>Предпросмотр:</strong></p>
+      <img src="{{ image_url }}" alt="Сгенерированное изображение">
+    {% endif %}
+</body>
+</html>
